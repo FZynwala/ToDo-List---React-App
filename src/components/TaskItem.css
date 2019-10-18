@@ -1,0 +1,13 @@
+.buttons {
+   margin-top: 3%;
+}
+
+.item-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.content {
+    display: inline-block;
+}
