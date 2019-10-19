@@ -24,15 +24,17 @@ class App extends React.Component {
         console.log(this.state);
     };
 
-    /*isDoneUpdate = {
-
-    }*/
+    onClickDelete = (id)=> {
+        const oldTasks = this.state.tasks;
+        const newTasks = oldTasks.filter(task => task.id !== id);
+        this.setState({ tasks: newTasks });
+    };
 
     render() {
         return (
             <div>
                 <InputBar onSubmit={this.onNewTaskSubmit} />
-                <TaskList tasks={this.state.tasks} />
+                <TaskList tasks={this.state.tasks} onClick={this.onClickDelete} />
             </div>
         );
     };

@@ -5,7 +5,7 @@ import TaskItem from './TaskItem';
 
 const TaskList = props => {
     const tasks = props.tasks.map((task) => {
-        return <TaskItem content={task.content} key={task.id} />
+        return <TaskItem content={task.content} key={task.id} id={task.id} onClick={props.onClick} />
     });
 
     return (
