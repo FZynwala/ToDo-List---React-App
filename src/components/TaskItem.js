@@ -1,6 +1,7 @@
 import './TaskItem.css';
 import React from 'react';
 
+
 const buttonConfig = {
     done: {
         color: 'green',
@@ -12,7 +13,6 @@ const buttonConfig = {
     }
 };
 
-let toogle = 'pending';
 
 class TaskItem extends React.Component {
     state = { isDone: false, color: 'red', text: 'PENDING' };
@@ -20,10 +20,7 @@ class TaskItem extends React.Component {
     onClickStatus = (event) => {
         this.setState({isDone: !this.state.isDone});
         const { color, text } = buttonConfig[this.state.isDone ? 'done' : 'pending'];
-        this.setState({ color, text});
-        console.log(color);
-        console.log(text);
-        console.log(this.state.isDone ? 'done' : 'pending');
+        this.setState({ color, text });
     };
 
     onClickDeleteButton = (event) => {

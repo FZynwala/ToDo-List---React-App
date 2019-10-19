@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import InputBar from './InputBar';
 import TaskList from './TaskList';
 
@@ -15,7 +16,7 @@ class App extends React.Component {
         const newTask = {
             id: taskId,
             content: term,
-            date_created: new Date()
+            date_created: moment(new Date()).format('lll')
         };
 
         let temp = this.state.tasks;
