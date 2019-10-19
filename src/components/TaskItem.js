@@ -1,6 +1,5 @@
 import './TaskItem.css';
 import React from 'react';
-import EditInput from './EditInput';
 
 
 const buttonConfig = {
@@ -39,9 +38,16 @@ class TaskItem extends React.Component {
        
     };
 
+    onSubmitUpdate = (event) => {
+        event.preventDefault();
+        this.props.onSubmit(this.props.task.id, this.state.term);
+        this.setState({isEditMode: !this.state.isEditMode});
+    };
+
     editWindowRendering = () => {
         if(this.state.isEditMode) {
             return (
+                <form onSubmit={this.onSubmitUpdate}>
                 <div className="edit-input ui input">
                     <input
                         type="text"
@@ -49,6 +55,7 @@ class TaskItem extends React.Component {
                         onChange={e => this.setState({ term: e.target.value})}
                     />
                 </div>
+                </form>
             );
         } else {
             return <div className="header" style={{marginBottom: '10px'}}>{this.props.task.content}</div>

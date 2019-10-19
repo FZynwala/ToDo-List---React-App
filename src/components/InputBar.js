@@ -14,10 +14,9 @@ class InputBar extends React.Component {
 
     render() {
         return (
-            <div className="input-bar ui segment" style={{marginTop: '10px', marginLeft: 'auto', marginRight: 'auto'}}>
+            <div className="input-bar ui segment" style={{marginTop: '10px', marginLeft: 'auto', marginRight: 'auto', backgroundColor: 'black'}}>
                 <form className="ui form" onSubmit={this.onFormSubmit}>
                     <div className="field">
-                        <label>Type new task</label>
                         <input
                             type="text"
                             value={this.state.term}

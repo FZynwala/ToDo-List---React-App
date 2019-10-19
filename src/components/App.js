@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import InputBar from './InputBar';
 import TaskList from './TaskList';
+import Header from './Header';
 
 
 let taskId = null;
@@ -31,11 +32,23 @@ class App extends React.Component {
         this.setState({ tasks: newTasks });
     };
 
+    onSubmitUpdate = (id, newContent) => {
+        const tasks = this.state.tasks;
+        tasks.forEach(task => { if(task.id === id) { 
+            task.content = newContent;
+        }} );
+        console.log(tasks);
+        
+        this.setState({ tasks: tasks }); 
+        console.log(this.state);
+    };
+
     render() {
         return (
             <div>
+                <Header />
                 <InputBar onSubmit={this.onNewTaskSubmit} />
-                <TaskList tasks={this.state.tasks} onClick={this.onClickDelete} />
+                <TaskList tasks={this.state.tasks} onClick={this.onClickDelete} onSubmit={this.onSubmitUpdate} />
             </div>
         );
     };
