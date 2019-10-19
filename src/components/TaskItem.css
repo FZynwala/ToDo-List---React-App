@@ -10,4 +10,14 @@
 
 .content {
     display: inline-block;
+    font-size: 13px;
+}
+
+.header {
+    font-size: 19px;
+    margin-bottom: 5px;
+}
+
+.edit-input {
+    display: block;
 }

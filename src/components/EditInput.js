@@ -1,23 +1,22 @@
-import './InputBar.css';
+//import './EditInput.css';
 import React from 'react';
 
-class InputBar extends React.Component {
-    state = { term: '' };
+class EditInput extends React.Component {
+    state = { term: this.props.content };
     
 
     onFormSubmit = (event) => {
         event.preventDefault();
         
         this.props.onSubmit(this.state.term);
-        this.setState({ term: '' });
     };
 
     render() {
         return (
-            <div className="input-bar ui segment" style={{marginTop: '10px', marginLeft: 'auto', marginRight: 'auto'}}>
+            <div className="input-bar ui segment" >
                 <form className="ui form" onSubmit={this.onFormSubmit}>
                     <div className="field">
-                        <label>Type new task</label>
+                        <label>Edit task</label>
                         <input
                             type="text"
                             value={this.state.term}
@@ -31,4 +30,4 @@ class InputBar extends React.Component {
     };
 };
 
-export default InputBar;
+export default EditInput;
