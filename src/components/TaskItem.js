@@ -23,8 +23,8 @@ class TaskItem extends React.Component {
         term: this.props.task.content 
     };
 
-    onClickStatus = (event) => {
-        this.setState({isDone: !this.state.isDone});
+    onClickStatus = async (event) => {
+        await this.setState({isDone: !this.state.isDone});
         const { color, text } = buttonConfig[this.state.isDone ? 'done' : 'pending'];
         this.setState({ color, text });
     };
