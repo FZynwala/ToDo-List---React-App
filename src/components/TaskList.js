@@ -13,7 +13,7 @@ const TaskList = props => {
         console.log(props.tasks);
         if(props.tasks.length !== 0) return tasks;
         
-        return 'Relax! You have nothing to do'
+        return 'Relax! You have nothing to do right now.'
     }
 
     return (
