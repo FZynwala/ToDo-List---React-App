@@ -1,0 +1,19 @@
+.filter-button {
+    position: absolute;
+    right: 5%;
+    top: 7%;
+    z-index: 1;
+}
+
+.filter-menu {
+    position: absolute;
+    right: 0;
+    top: 10.5%;
+    z-index: 1;
+}
+
+@media only screen and (max-height: 575px) {
+    .filter-menu {
+        top: 11%;
+    }
+}

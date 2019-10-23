@@ -5,8 +5,17 @@ import TaskItem from './TaskItem';
 
 
 const TaskList = props => {
+    console.log(props);
     const tasks = props.tasks.map((task) => {
-        return <TaskItem task={task} key={task.id} onClick={props.onClick} onSubmit={props.onSubmit} />
+        return (
+            <TaskItem
+                task={task}
+                key={task.id}
+                onClick={props.onClick}
+                onSubmit={props.onSubmit}
+                isDoneChange={props.isDoneChange}
+            />
+        );
     });
 
     const renderTasks = () => {

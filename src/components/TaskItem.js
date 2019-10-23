@@ -23,9 +23,11 @@ class TaskItem extends React.Component {
         term: this.props.task.content 
     };
 
-    onClickStatus = async (event) => {
-        await this.setState({isDone: !this.state.isDone});
-        const { color, text } = buttonConfig[this.state.isDone ? 'done' : 'pending'];
+    onClickStatus = (event) => {
+        //await this.setState({isDone: !this.state.isDone});
+        this.props.isDoneChange(this.props.task.id);
+        console.log(this.props.task.isDone);
+        const { color, text } = buttonConfig[this.props.task.isDone ? 'done' : 'pending'];
         this.setState({ color, text });
     };
 
@@ -42,6 +44,11 @@ class TaskItem extends React.Component {
         event.preventDefault();
         this.props.onSubmit(this.props.task.id, this.state.term);
         this.setState({isEditMode: !this.state.isEditMode});
+    };
+
+    componentDidMount = () => {
+        const { color, text } = buttonConfig[this.props.task.isDone ? 'done' : 'pending'];
+        this.setState({ color, text });
     };
 
     editWindowRendering = () => {
