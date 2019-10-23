@@ -33,7 +33,7 @@ class App extends React.Component {
     onClickDelete = (id)=> {
         const oldTasks = this.state.tasks;
         const newTasks = oldTasks.filter(task => task.id !== id);
-        this.setState({ tasks: newTasks });
+        this.setState({ tasks: newTasks, tasksToDisplay: newTasks });
     };
 
     onSubmitUpdate = (id, newContent) => {
