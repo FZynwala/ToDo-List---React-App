@@ -1,26 +1,22 @@
 import './InputBar.css';
+import { Field, reduxForm } from 'redux-form';
 import React from 'react';
 
 class InputBar extends React.Component {
     state = { term: '' };
     
 
-    onFormSubmit = (event) => {
-        event.preventDefault();
+    onFormSubmit = (formValues) => {
         
-        this.props.onSubmit(this.state.term);
-        this.setState({ term: '' });
+        console.log(formValues.newTask);
     };
 
-    render() {
+    renderInput = ({ input }) => {
         return (
             <div className="input-bar ui segment" style={{marginTop: '10px', marginLeft: 'auto', marginRight: 'auto', backgroundColor: 'black'}}>
-                <form className="ui form" onSubmit={this.onFormSubmit}>
+                <form onSubmit={this.props.handleSubmit(this.onFormSubmit)} className="ui form" >
                     <div className="field">
-                        <input
-                            type="text"
-                            value={this.state.term}
-                            onChange={e => this.setState({ term: e.target.value})}
+                        <input { ...input}
                             placeholder="Type new task..."
                         />
                     </div>
@@ -28,6 +24,16 @@ class InputBar extends React.Component {
             </div>
         );
     };
+
+    render() {
+        return (
+            <div>
+                <Field name="newTask" component={this.renderInput} />
+            </div>
+        );
+    };
 };
 
-export default InputBar;
+export default reduxForm({
+    form: 'newTask'
+})(InputBar);

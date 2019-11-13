@@ -22,6 +22,7 @@ class App extends React.Component {
                 <BrowserRouter>
                     <div>
                         <Header />
+                        <InputBar />
                         <Route path="/" exact component={LoginPage} />
                         <Route path="/list" exact component={TaskList} />
                     </div>
