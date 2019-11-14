@@ -1,5 +1,7 @@
 import './TaskItem.css';
 import React from 'react';
+import { connect } from 'react-redux';
+import { editTask } from '../actions';
 
 
 const buttonConfig = {
@@ -24,11 +26,8 @@ class TaskItem extends React.Component {
     };
 
     onClickStatus = (event) => {
-        //await this.setState({isDone: !this.state.isDone});
-        this.props.isDoneChange(this.props.task.id);
-        console.log(this.props.task.isDone);
-        const { color, text } = buttonConfig[this.props.task.isDone ? 'done' : 'pending'];
-        this.setState({ color, text });
+        const editedTask = {...this.props.task, isDone: !this.props.task.isDone};
+        this.props.editTask(this.props.task.id, editedTask);
     };
 
     onClickDeleteButton = (event) => {
@@ -70,6 +69,7 @@ class TaskItem extends React.Component {
     };
 
     render() {
+        const { color, text } = buttonConfig[this.props.task.isDone ? 'done' : 'pending'];
         return (
             <div className="item-box item" style={{marginBottom: '0px'}} >
                 <div className="content">
@@ -78,7 +78,7 @@ class TaskItem extends React.Component {
                     
                 </div>
                 <div className="buttons" >
-                    <button className={`button-status ui inverted ${this.state.color} button`} onClick={this.onClickStatus} >{this.state.text}</button>
+                    <button className={`button-status ui inverted ${color} button`} onClick={this.onClickStatus} >{text}</button>
                     <button className="ui icon button" onClick={this.onClickEditButton} ><i className="black edit outline icon"></i></button>
                     <button className="ui icon button" onClick={this.onClickDeleteButton} ><i className="black trash alternate outline icon"></i></button>
                 </div>
@@ -87,4 +87,4 @@ class TaskItem extends React.Component {
     };
 };
 
-export default TaskItem;
+export default connect(null, { editTask })(TaskItem);

@@ -1,14 +1,23 @@
 import './InputBar.css';
 import { Field, reduxForm } from 'redux-form';
 import React from 'react';
+import { connect } from 'react-redux';
+import moment from 'moment';
+
+import { addTask } from '../actions';
 
 class InputBar extends React.Component {
     state = { term: '' };
     
 
     onFormSubmit = (formValues) => {
-        
-        console.log(formValues.newTask);
+        const newTask = {
+            content: formValues.newTask,
+            userId: this.props.userId,
+            isDone: false,
+            create_date: moment(new Date()).format('lll') 
+        };
+        this.props.addTask(newTask);
     };
 
     renderInput = ({ input }) => {
@@ -26,6 +35,7 @@ class InputBar extends React.Component {
     };
 
     render() {
+        console.log(this.props);
         return (
             <div>
                 <Field name="newTask" component={this.renderInput} />
@@ -34,6 +44,14 @@ class InputBar extends React.Component {
     };
 };
 
+const mapStateToProps =(state) => {
+    return {
+        userId: state.auth.userId
+    };
+};
+
+const con = connect(mapStateToProps, { addTask })(InputBar);
+
 export default reduxForm({
     form: 'newTask'
-})(InputBar);
+})(con);
