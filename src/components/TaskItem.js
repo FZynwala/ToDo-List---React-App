@@ -1,7 +1,11 @@
 import './TaskItem.css';
 import React from 'react';
 import { connect } from 'react-redux';
-import { editTask } from '../actions';
+import { reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
+
+import { editTask, editMode } from '../actions';
+import InputForm from './InputForm';
 
 
 const buttonConfig = {
@@ -35,13 +39,18 @@ class TaskItem extends React.Component {
     };
 
     onClickEditButton = () => {
-        this.setState({isEditMode: !this.state.isEditMode});
-       
+        this.setState({ isEditMode: !this.state.isEditMode })
     };
 
     onSubmitUpdate = (event) => {
         event.preventDefault();
         this.props.onSubmit(this.props.task.id, this.state.term);
+        this.setState({isEditMode: !this.state.isEditMode});
+    };
+
+    onSubmit = (formValues) => {
+        const editedTask = {...this.props.task, content: formValues.newTask};
+        this.props.editTask(this.props.task.id, editedTask);
         this.setState({isEditMode: !this.state.isEditMode});
     };
 
@@ -53,15 +62,7 @@ class TaskItem extends React.Component {
     editWindowRendering = () => {
         if(this.state.isEditMode) {
             return (
-                <form onSubmit={this.onSubmitUpdate}>
-                <div className="edit-input ui input">
-                    <input
-                        type="text"
-                        value={this.state.term}
-                        onChange={e => this.setState({ term: e.target.value})}
-                    />
-                </div>
-                </form>
+                <InputForm initialValues={{newTask: this.props.task.content}} onSubmit={this.onSubmit} />
             );
         } else {
             return <div className="header" style={{marginBottom: '10px'}}>{this.props.task.content}</div>
@@ -80,11 +81,15 @@ class TaskItem extends React.Component {
                 <div className="buttons" >
                     <button className={`button-status ui inverted ${color} button`} onClick={this.onClickStatus} >{text}</button>
                     <button className="ui icon button" onClick={this.onClickEditButton} ><i className="black edit outline icon"></i></button>
-                    <button className="ui icon button" onClick={this.onClickDeleteButton} ><i className="black trash alternate outline icon"></i></button>
+                    <Link to={`/delete/${this.props.task.id}`} className="ui icon button" ><i className="black trash alternate outline icon"></i></Link>
                 </div>
             </div>
         );
     };
 };
 
-export default connect(null, { editTask })(TaskItem);
+
+const con = connect(null, { editTask })(TaskItem);
+export default reduxForm({
+    form: 'editTask'
+})(con);

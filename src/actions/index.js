@@ -1,5 +1,6 @@
-import { SIGN_IN, SIGN_OUT, ADD_TASK, LOAD_TASKS, EDIT_TASK } from "./type"
+import { SIGN_IN, SIGN_OUT, ADD_TASK, LOAD_TASKS, EDIT_TASK, DELETE_TASK } from "./type"
 import tasks from "../apis/tasks";
+import history from '../history';
 
 export const signIn = (userId) => {
     return {
@@ -34,11 +35,21 @@ export const addTask = (task) => async (dispatch) => {
 
 export const fetchTasks = () => async (dispatch) => {
     const response = await tasks.get('/tasks');
-    console.log(response.data);
 
     dispatch({
         type: LOAD_TASKS,
         payload: response.data
     });
+};
+
+export const deleteTask = (taskId) => async (dispatch) => {
+    await tasks.delete(`/tasks/${taskId}`);
+
+    dispatch({
+        type: DELETE_TASK,
+        payload: taskId
+    });
+
+    history.push('/list');
 };
 
