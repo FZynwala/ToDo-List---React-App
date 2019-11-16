@@ -1,10 +1,10 @@
-import { EDIT_MODE } from "../actions/type";
+import { TOGGLE_MENU } from "../actions/type";
 
 export default (state=false, action) => {
     switch (action.type) {
-        case EDIT_MODE:
+        case TOGGLE_MENU:
             let newState = state;
-            return newState = !newState;
+            return !newState;
         default:
             return state;
     };

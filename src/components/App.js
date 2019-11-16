@@ -11,6 +11,8 @@ import LoginPage from './LoginPage';
 import Modal from './Modal';
 import history from '../history';
 import TaskDelete from './TaskDelete';
+import Menu from './Menu';
+import TaskListDone from './TaskListDone';
 
 
 class App extends React.Component {
@@ -23,11 +25,11 @@ class App extends React.Component {
             <div>
                 <Router history={history}>
                     <div>
-                        <Header />
-                        <InputBar />
+                        
                         <Route path="/" exact component={LoginPage} />
-                        <Route path="/list" exact component={TaskList} />
+                        <Route path="/list/:conf" exact component={Menu} />
                         <Route path="/delete/:id" exact component={TaskDelete} />
+                        <Route path="/list/done" exact component={TaskListDone} />
                     </div>
                 </Router>
             </div>

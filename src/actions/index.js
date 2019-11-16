@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT, ADD_TASK, LOAD_TASKS, EDIT_TASK, DELETE_TASK } from "./type"
+import { SIGN_IN, SIGN_OUT, ADD_TASK, LOAD_TASKS, EDIT_TASK, DELETE_TASK, TOGGLE_MENU } from "./type"
 import tasks from "../apis/tasks";
 import history from '../history';
 
@@ -12,6 +12,12 @@ export const signIn = (userId) => {
 export const signOut = () => {
     return {
         type: SIGN_OUT
+    };
+};
+
+export const toggleMenu = () => {
+    return {
+        type: TOGGLE_MENU
     };
 };
 

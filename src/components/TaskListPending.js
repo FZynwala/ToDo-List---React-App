@@ -8,19 +8,21 @@ import InputBar from './InputBar';
 
 
 
-class TaskList extends React.Component {
+class TaskListPending extends React.Component {
     
    renderTasks() {
     if(this.props.tasks.length === 0) {
-        return 'Relax! You have nothing to do right now.';
+        return 'You haven not done anything yet!';
     } else {
         return this.props.tasks.map((task) => {
-             return (
-                 <TaskItem
-                     task={task}
-                     key={task.id}
-                 />
-             );
+            if(!task.isDone) {
+                return (
+                    <TaskItem
+                        task={task}
+                        key={task.id}
+                    />
+                );
+            }
          });
     }
    }; 
@@ -47,4 +49,4 @@ const mapStateToProps =(state) => {
     };
 };
 
-export default connect(mapStateToProps)(TaskList);
+export default connect(mapStateToProps)(TaskListPending);
