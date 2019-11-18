@@ -32,11 +32,11 @@ class Menu extends React.Component {
         const conf = this.props.match.params.conf;
         console.log(conf);
         if(conf === '0') {
-            return <TaskList />
+            return <TaskList conf='0' />
         } else if(conf === '1') {
-            return <TaskListDone />
+            return <TaskListDone conf='1' />
         } else if(conf === '2') {
-            return <TaskListPending />
+            return <TaskListPending conf='2' />
         }
     };
 

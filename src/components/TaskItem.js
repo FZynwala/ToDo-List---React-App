@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 
-import { editTask, editMode } from '../actions';
+import { editTask } from '../actions';
 import InputForm from './InputForm';
 
 
@@ -21,13 +21,7 @@ const buttonConfig = {
 
 
 class TaskItem extends React.Component {
-    state = { 
-        isDone: false,
-        color: 'red',
-        text: 'PENDING',
-        isEditMode: false,
-        term: this.props.task.content 
-    };
+    state = { isEditMode: false };
 
     onClickStatus = (event) => {
         const editedTask = {...this.props.task, isDone: !this.props.task.isDone};
@@ -52,11 +46,6 @@ class TaskItem extends React.Component {
         const editedTask = {...this.props.task, content: formValues.newTask};
         this.props.editTask(this.props.task.id, editedTask);
         this.setState({isEditMode: !this.state.isEditMode});
-    };
-
-    componentDidMount = () => {
-        const { color, text } = buttonConfig[this.props.task.isDone ? 'done' : 'pending'];
-        this.setState({ color, text });
     };
 
     editWindowRendering = () => {

@@ -8,11 +8,12 @@ import { deleteTask } from "../actions";
 class TaskDelete extends React.Component {
     renderActions() {
         const { id } = this.props.match.params;
+        const nav = this.props.nav;
 
         return (
             <React.Fragment>
-                <button onClick={() => this.props.deleteTask(id)} className="ui primary button">Delete</button>
-                <Link to="/list" className="ui button">Cancel</Link>
+                <button onClick={() => this.props.deleteTask(id, nav)} className="ui primary button">Delete</button>
+                <Link to={`/list/${nav}`} className="ui button">Cancel</Link>
             </React.Fragment>
         );
     }; 
@@ -23,10 +24,16 @@ class TaskDelete extends React.Component {
             title="Delete Task"
             content="Are you sure you want to delete this task?"
             actions={this.renderActions()}
-            onDismiss={() => history.push('/list')}
+            onDismiss={() => history.push(`/list/${this.props.nav}`)}
             />
         );
     };
 }
 
-export default connect(null, { deleteTask })(TaskDelete);
+const mapStateToProps = (state) => {
+    return {
+        nav: state.nav
+    };
+};
+
+export default connect(mapStateToProps, { deleteTask })(TaskDelete);

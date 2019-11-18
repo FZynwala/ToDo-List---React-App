@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT, ADD_TASK, LOAD_TASKS, EDIT_TASK, DELETE_TASK, TOGGLE_MENU } from "./type"
+import { SIGN_IN, SIGN_OUT, ADD_TASK, LOAD_TASKS, EDIT_TASK, DELETE_TASK, TOGGLE_MENU, NAV_PAGE } from "./type"
 import tasks from "../apis/tasks";
 import history from '../history';
 
@@ -18,6 +18,13 @@ export const signOut = () => {
 export const toggleMenu = () => {
     return {
         type: TOGGLE_MENU
+    };
+};
+
+export const setNavFlag = (nav) => {
+    return {
+        type: NAV_PAGE,
+        payload: nav
     };
 };
 
@@ -48,7 +55,7 @@ export const fetchTasks = () => async (dispatch) => {
     });
 };
 
-export const deleteTask = (taskId) => async (dispatch) => {
+export const deleteTask = (taskId, nav) => async (dispatch) => {
     await tasks.delete(`/tasks/${taskId}`);
 
     dispatch({
@@ -56,6 +63,6 @@ export const deleteTask = (taskId) => async (dispatch) => {
         payload: taskId
     });
 
-    history.push('/list');
+    history.push(`/list/${nav}`);
 };
 

@@ -5,10 +5,13 @@ import TaskItem from './TaskItem';
 import Menu from './Menu';
 import Header from './Header';
 import InputBar from './InputBar';
-
+import { setNavFlag } from '../actions';
 
 
 class TaskListDone extends React.Component {
+    componentDidMount() {
+        this.props.setNavFlag(this.props.conf);
+    }
     
    renderTasks() {
     if(this.props.tasks.length === 0) {
@@ -49,4 +52,4 @@ const mapStateToProps =(state) => {
     };
 };
 
-export default connect(mapStateToProps)(TaskListDone);
+export default connect(mapStateToProps, { setNavFlag })(TaskListDone);
