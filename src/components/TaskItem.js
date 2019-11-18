@@ -64,7 +64,7 @@ class TaskItem extends React.Component {
             <div className="item-box item" style={{marginBottom: '0px'}} >
                 <div className="content">
                     {this.editWindowRendering()}
-                    {this.props.task.date_created}
+                    {this.props.task.create_date}
                     
                 </div>
                 <div className="buttons" >
