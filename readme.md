@@ -1,6 +1,5 @@
 <h1>TODO-List</h1>
 The reason for writing this app is to practice technology such us:
-
 <ul>
 <li>React</li>
 <li>Redux</li>
@@ -8,3 +7,5 @@ The reason for writing this app is to practice technology such us:
 <li>Node JS</li>
 <li>MongoDB</li>
 <li>Google API</li>
+</ul>
+<h2>Demo</h2>
